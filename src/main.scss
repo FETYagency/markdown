@@ -1,0 +1,427 @@
+@use "sass:math";
+@function toRem($unit, $rem: 16){
+    @return math.div($unit, $rem) * 1rem
+};
+@import url('https://fonts.googleapis.com/css2?family=Roboto&family=Roboto+Slab:wght@300;700&display=swap');
+
+@import url(reset.css);
+
+body{
+    background: var(--800, #2B2D31);
+    min-block-size: 100vh;
+}
+#root{
+    min-block-size: 100vh;
+}
+.hiddenForm{
+    position: absolute;
+
+}
+h1,h2,h3,h4{
+    font-family: 'Roboto', sans-serif;
+}
+p,span{
+    font-family: 'Roboto', sans-serif;
+}
+button{
+    cursor: pointer;
+}
+input[type="text"]{
+    cursor: pointer;
+
+}
+main{
+    display: grid;
+    grid-template-columns: auto auto 1fr;
+    grid-template-rows: auto 1fr;
+    grid-template-areas: 
+    "bar barBtn header"
+    "bar editor editor"
+    ;
+    min-block-size: 100vh;
+}
+.documents-links{
+    grid-area: bar;
+    
+    display: flex;
+    flex-direction: column;
+    gap: toRem(29);
+    inline-size: 0px;
+    overflow: hidden;
+    position: relative;
+    >.label{
+        color: var(--500, #7C8187);
+        font-size: toRem(14);
+        font-weight: 500;
+        line-height: normal;
+        letter-spacing: 2px;
+    }
+    >.create-btn{
+        color: var(--100, #FFF);
+        font-size: toRem(15);
+        font-weight: 400;
+        line-height: normal;
+
+        block-size: toRem(40);
+        inline-size: toRem(202);
+    }
+    >.links{
+        display: flex;
+        flex-direction: column;
+        >a{
+            text-decoration: none;
+            user-select: none;
+            display: grid;
+            grid-template-areas: 
+            "svg label"
+            "svg name"
+            ;
+            column-gap: toRem(16);
+            row-gap: toRem(4);
+            place-content: start;
+            place-items: center start;
+            padding-inline: toRem(24);
+            padding-block: toRem(18);
+            >.doc-svg{
+                grid-area: svg;
+            }
+            >.label{
+                grid-area: label;
+                color: var(--400, #C1C4CB);
+                font-size: toRem(13);
+                font-weight: 300;
+                line-height: normal;
+            }
+            >.name{
+                grid-area: name;
+                color: var(--100, #FFF);
+                font-size: toRem(15);
+                font-weight: 400;
+                line-height: normal;
+                block-size: 100%;
+            }
+            &:hover{
+                >.name{
+                    color: #E46643;
+                }
+            }
+        }
+    }
+    .create-btn{
+        inline-size: toRem(202);
+        block-size: toRem(40);
+        color: var(--100, #FFF);
+        font-size: toRem(15);
+        font-weight: 400;
+        line-height: normal;
+        border-radius: 4px;
+        background: var(--Orange, #E46643); 
+        border: none;
+        &:hover{
+            background-color: #F39765;
+        }
+    }
+    &.showen{
+        padding-block: toRem(27);
+        padding-inline: toRem(24);
+        inline-size: auto;
+    }
+}
+
+.nav-btn{
+    grid-area: barBtn;
+    border: none;
+    background-color: transparent;
+    block-size: toRem(72);
+    aspect-ratio: 1;
+    &:hover{
+        background-color: #E46643;
+    }
+}
+
+.header{
+    grid-area: header;
+    display: flex;
+    align-items: center;
+    padding-inline-end: toRem(16);
+    >.logo{
+        color: var(--100, #FFF);
+        font-size: toRem(15);
+        font-weight: 700;
+        line-height: normal;
+        letter-spacing: 5px;
+        display: grid;
+        place-items: center;
+        padding-inline: toRem(24);
+        border-inline-end: solid 1px #5A6069;
+        padding-block: toRem(10);
+    }
+    >.doc-name{
+        cursor: pointer;
+        user-select: none;
+        display: grid;
+        grid-template-areas: 
+        "svg label"
+        "svg name"
+        ;
+        column-gap: toRem(16);
+        row-gap: toRem(4);
+        place-content: start;
+        place-items: center start;
+        padding-inline: toRem(24);
+        padding-block: toRem(18);
+        >.svg{
+            grid-area: svg;
+        }
+        >.label{
+            grid-area: label;
+            color: var(--400, #C1C4CB);
+            font-size: toRem(13);
+            font-weight: 300;
+            line-height: normal;
+        }
+        >.name{
+            grid-area: name;
+            block-size: toRem(20);
+            >.name,>form>input{
+                color: var(--100, #FFF);
+                font-size: toRem(15);
+                font-weight: 400;
+                line-height: normal;
+                block-size: 100%;
+            }
+            >form{
+                >input{
+                    background-color: transparent;
+                    inline-size: toRem(200);
+                    outline: none;
+                    border: none;
+                    border-block-end: solid 1px #fff;
+                    block-size: 100%;
+                    padding-block-end: toRem(5);
+                }
+            }
+        }
+    }
+    >.del-btn{
+        margin-inline-start: auto;
+        border: none;
+        background-color: transparent;
+        margin-inline-end: toRem(24);
+    }
+    .save-btn{
+        color: var(--100, #FFF);
+        font-size: toRem(15);
+        font-weight: 400;
+        line-height: normal;
+        padding-block: toRem(10);
+        padding-inline: toRem(17);
+        border-radius: 4px;
+        background: var(--Orange, #E46643);
+        border: none;
+        display: inline-flex;
+        align-items: center;
+        gap: toRem(8);
+        &:hover{
+            background: var(--Orange-Hover, #F39765);
+        }
+    }
+}
+.markdown-editor{
+    grid-area: editor;
+    
+    display: flex;
+    gap: toRem(1);
+    >*{
+        background: var(--1000, #151619);
+        display: grid;
+        place-content: start stretch;
+        grid-template-rows: auto 1fr;
+        >.bar{
+            background: var(--900, #1D1F22);
+
+            padding-block: toRem(13);
+            padding-inline: toRem(16);
+            display: flex;
+            justify-content: space-between;
+            >h3{
+                color: var(--400, #C1C4CB);
+                font-size: toRem(14);
+                font-weight: 500;
+                line-height: normal;
+                letter-spacing: 2px;
+            }
+        }
+    }
+    .markdown{
+        flex: 1 1 0;
+    }
+    .preview{
+        flex: 1 2 0;
+    }
+    textarea{
+        resize: none;
+        background-color: transparent;
+        border: none;
+        outline: none;
+
+        font-family: 'Roboto', sans-serif;
+        color: var(--400, #C1C4CB);
+        font-size: toRem(14);
+        font-weight: 400;
+        line-height: toRem(24);
+
+        padding-inline: toRem(16);
+        padding-block: toRem(9);
+    }
+}
+.preview{
+   grid-area: editor;
+   background: var(--1000, #151619);
+   >.bar{
+        display: flex;
+        justify-content: space-between;
+        background: var(--900, #1D1F22);
+        padding-inline: toRem(16);
+        padding-block: toRem(13);
+        >h3{
+            color: var(--400, #C1C4CB);
+            font-size: toRem(14);
+            font-weight: 500;
+            line-height: normal;
+            letter-spacing: 2px;
+        }
+        >button{
+            border: none;
+            background-color: transparent;
+        }
+   }
+}
+.markdown-preview{
+    
+    padding: toRem(24);
+    
+    >*{
+        margin-block-end: toRem(20);
+        &:last-child{
+            margin-block-end: toRem(0);
+        }
+    }
+    h1,h2,h3,h4,h5,h6{
+        font-family: 'Roboto Slab', serif;
+        font-weight: 700;
+        line-height: normal;
+        color: #fff;
+    }
+    color: var(--400, #C1C4CB);
+    p{
+        font-size: toRem(14);
+        font-weight: 400;
+        line-height: toRem(24);
+    }
+    a{
+        color: #FFF;
+        font-family: 'Roboto Slab', serif;
+        font-size: toRem(14);
+        font-weight: 700;
+        line-height: toRem(24);
+        text-decoration-line: underline;
+    }
+    h1{
+        font-size: toRem(32);
+    }
+    h2{
+        font-size: toRem(28);
+        font-weight: 300;
+    }
+    h3{
+        font-size: toRem(24);
+    }
+    h4{
+        font-size: toRem(20);
+    }
+    h5{
+        font-size: toRem(16);
+    }
+    h6{
+        font-size: toRem(14);
+        color: var(--Orange, #E46643) !important;
+    }
+    blockquote{
+        border-radius: 4px;
+        background: var(--800, #2B2D31);
+        padding: toRem(24);
+        border-inline-start: 2px solid #E46643;
+    }
+    li{
+        list-style-type: disc;
+        list-style-position: inside;
+        margin-inline-start: toRem(24);
+        margin-block-end: toRem(4);
+        &:last-child{
+            margin-block-end: toRem(0);
+        }
+    }
+    li::marker{
+        color: #E46643;
+    }
+    pre{
+        border-radius: 4px;
+        background: var(--800, #2B2D31);
+        padding: toRem(24);
+        >code{
+            color: var(--100, #FFF);
+            font-family: 'Roboto', sans-serif;
+            font-size: toRem(14);
+            font-weight: 400;
+            line-height: toRem(24);
+        }
+    }
+}
+
+.overlay{
+    position: fixed;
+    inset: 0;
+    display: grid;
+    place-items: center;
+
+    background: var(--500, #7c818746);
+    .askToDeleteUI{
+        inline-size: min(343px, 95%);
+        border-radius: 4px;
+        background: var(--900, #1D1F22);
+        padding: toRem(24);
+        >*{
+            margin-block-end: toRem(16);
+            &:last-child{
+                margin: 0;
+            }
+        }
+        >h2{
+            color: var(--100, #FFF);
+            font-size: 20px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: normal;
+        }
+        p{
+            color: var(--400, #C1C4CB);
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 24px;
+        }
+        >button{
+            border-radius: 4px;
+            background: var(--Orange, #E46643);
+            color: var(--100, #FFF);
+            font-size: 15px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+            border: none;
+            inline-size: 100%;
+            block-size: toRem(40);
+        }
+    }
+}
